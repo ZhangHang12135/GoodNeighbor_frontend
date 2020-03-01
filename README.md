@@ -24,6 +24,7 @@ yarn run test
 ```
 yarn run lint
 ```
+### 添加自动化部署
 ### 项目概述
 - vue-cli 构建
 - vue ~2.6.10, vuex ~3.0.1, vue-router ~3.0.3
