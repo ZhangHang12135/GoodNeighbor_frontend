@@ -1,4 +1,5 @@
-# zh_admin
+# GoodNeighbor_Frontend
+"好邻居"外卖平台 商家端 前端
 
 ## Project setup
 ```
@@ -30,17 +31,9 @@ yarn run lint
 - vue ~2.6.10, vuex ~3.0.1, vue-router ~3.0.3
 - iview UI框架
 - less 预处理器
-- mockjs模拟数据
 - echarts 图表，第三方虚拟表格渲染10w+数据
 ### 项目图例
-1. login-page
-![登录页](./readme-img/login.png)
-2. home-page
-![首页](./readme-img/home.png)
-3. edit-table-page
-![可编辑表格页](./readme-img/edit-table.png)
-4. edit-table-page
-![大数据表格页](./readme-img/big-table.png)
+
 
 ### 项目目录
 ```
