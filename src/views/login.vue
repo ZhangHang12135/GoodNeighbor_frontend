@@ -4,7 +4,7 @@
       <Card icon="login-in" title="登录" :bordered="true">
         <div class="form-con">
           <login-form @on-success-valid="handleSubmit"></login-form>
-          <p class="login-tip">输入任意用户名和密码123</p>
+          <p class="login-tip">忘记密码？</p>
         </div>
       </Card>
     </div>
@@ -47,7 +47,7 @@ export default {
 .login{
   width: 100%;
   height: 100%;
-  background-image: url('../assets/img/bg_fulian3.jpg');
+  background-image: url('../assets/img/cover.jpg');
   background-size: cover;
   position: relative;
   &-con{

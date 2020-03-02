@@ -1,7 +1,7 @@
 <template>
   <Form ref="loginForm" :model="form" :rules="rules" @keydown.enter.native="handleSubmit" style="background: transparent;">
     <FormItem prop="userName">
-      <i-input v-model="form.userName" placeholder="请输入用户名">
+      <i-input v-model="form.userName" placeholder="请输入手机号">
         <span slot="prepend">
           <Icon :size="16" type="ios-person"></Icon>
         </span>
@@ -15,7 +15,8 @@
       </i-input>
     </FormItem>
     <FormItem>
-      <Button @click="handleSubmit" type="error" long>登录</Button>
+      <Button @click="handleSubmit" type="info" style="margin-left: 10%;">登录</Button>
+      <Button @click="handleSubmit" type="info" style="float:right;margin-right: 10%;">注册</Button>
     </FormItem>
   </Form>
 </template>
@@ -75,7 +76,8 @@ export default {
   }
 }
 </script>
-<style lang="less">
+<style lang="less" scope>
+
 </style>
 
 
