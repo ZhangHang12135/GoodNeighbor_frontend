@@ -25,12 +25,12 @@
     <Row :gutter="20" type="flex">
       <i-col :lg="12">
         <Card class="card-img">
-           <img src="../assets/img/marvel.jpg">
+           <img src="../assets/img/cover.jpg">
         </Card>
       </i-col>
       <i-col :lg="12">
         <Card class="card-img">
-           <img src="../assets/img/bg_fulian3.jpg">
+           <img src="../assets/img/cover.jpg">
         </Card>
       </i-col>
     </Row>

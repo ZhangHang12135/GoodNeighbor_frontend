@@ -52,9 +52,9 @@ export default {
   position: relative;
   &-con{
     position: absolute;
-    left: ~"calc(50% - 150px)";
+    left: 80%;
     top: 50%;
-    transform: translateY(-60%);
+    transform: translate(-50%,-50%);
     width: 300px;
     &-header{
       font-size: 16px;
@@ -64,12 +64,11 @@ export default {
     }
     .form-con{
       padding: 10px 0 0;
-      background: transparent;
     }
     .login-tip{
       font-size: 10px;
       text-align: center;
-      color: #c3c3c3;
+      color: black;
     }
   }
 }
