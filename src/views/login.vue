@@ -47,7 +47,7 @@ export default {
 .login{
   width: 100%;
   height: 100%;
-  background-image: url('../assets/img/cover.jpg');
+  background-image: url('../assets/img/cover3.png');
   background-size: cover;
   position: relative;
   &-con{

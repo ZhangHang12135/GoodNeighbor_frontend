@@ -2,7 +2,7 @@ import axios from './index'
 
 export const login = ({ userName, password }) => {
   return axios.request({
-    url: '/login',
+    url: 'http://192.168.0.105:7001/login',
     data: {
       userName,
       password
@@ -13,14 +13,15 @@ export const login = ({ userName, password }) => {
 
 export const authorization = () => {
   return axios.request({
-    url: '/authorization',
+    url: 'http://192.168.0.105:7001/authorization',
     method: 'get'
   })
 }
 
 export const getUserInfo = (token) => {
+  console.log('发送请求')
   return axios.request({
-    url: '/getUserInfo',
+    url: 'http://192.168.0.105:7001/getUserInfo',
     params: {
       token
     },

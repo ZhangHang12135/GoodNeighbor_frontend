@@ -27,7 +27,7 @@ export default {
     login ({ commit }, { userName, password }) {
       return new Promise((resolve, reject) => {
         login({ userName, password }).then(res => {
-          // console.log(res)
+          console.log(res)
           if (res.code === 200 && res.data.token) {
             commit('SET_TOKEN', res.data.token)
             resolve()
@@ -74,6 +74,7 @@ export default {
             setUser({ userName, avatarImgPath })
             resolve(data)
           }).catch(err => {
+            console.log('???')
             reject(err)
           })
         } catch (error) {
