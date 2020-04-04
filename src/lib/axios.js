@@ -29,20 +29,6 @@ class HttpRequest {
    * @param {url} url
    */
   interceptors (instance, url) {
-    // 请求拦截器
-    instance.interceptors.request.use(config => {
-      // 添加全局的loading...
-      if (!Object.keys(this.queue).length) {
-        // Spin.show()
-      }
-      // 请求队列+1
-      this.queue[url] = true
-      // 添加验证头
-      config.headers['Authorizeation'] = getToken()
-      return config
-    }, error => {
-      return Promise.reject(error)
-    })
     // 返回拦截器
     instance.interceptors.response.use(res => {
       this.distroy(url)

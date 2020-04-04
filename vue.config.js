@@ -13,7 +13,7 @@ module.exports = {
       .set('_c', resolve('src/components'))
     config.module
       .rule('image')
-      .test(/\.(jpg)$/)
+      .test(/\.(jpe?g|png|gif|svg)$/)
       .use('image-webpack-loader')
       .loader('image-webpack-loader')
       .end()

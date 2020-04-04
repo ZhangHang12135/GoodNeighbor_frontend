@@ -1,6 +1,7 @@
 // 路由
 import Main from '@/views/layout.vue'
-export const routerMap = [
+
+export const routeMap = [
   {
     path: '/',
     name: 'layout',
@@ -18,61 +19,16 @@ export const routerMap = [
     ]
   },
   {
-    path: '/components',
-    name: 'components',
+    path: 'menu',
+    name: 'menu',
     meta: {
-      title: '组件页',
-      icon: 'meiguoduichang'
+      title: '菜品管理',
+      icon: 'A'
     },
-    component: Main,
-    children: [
-      {
-        path: 'edit_table',
-        name: 'edit_table',
-        meta: {
-          title: '可编辑表格',
-          icon: 'fuchouzhelianmeng-meiguoduichang1'
-        },
-        component: () => import('@/views/edit-table.vue')
-      },
-      {
-        path: 'big_data_table',
-        name: 'big_data_table',
-        meta: {
-          title: '大数据表格',
-          icon: 'fuchouzhelianmeng-leishen'
-        },
-        component: () => import('@/views/bigData-table.vue')
-      }
-    ]
-  },
-  {
-    path: '/',
-    name: '_icon_page',
-    component: Main,
-    children: [
-      {
-        path: 'icon_page',
-        name: 'icon_page',
-        meta: {
-          title: '图标',
-          icon: 'meiguoduichang_zuoyetiaodu'
-        },
-        component: () => import('@/views/icon-page.vue')
-      }
-    ]
-  },
-  {
-    path: '/blog',
-    name: 'blog',
-    meta: {
-      title: '个人博客',
-      icon: 'zhizhuxia'
-    }
+    component: () => import('@/views/menu.vue')
   }
 ]
-// 通用路由
-// 不加name
+
 export const routes = [
   {
     path: '/login',
@@ -80,6 +36,45 @@ export const routes = [
       title: '登录'
     },
     component: () => import('@/views/login.vue')
+  },
+  {
+    path: '/register',
+    meta: {
+      title: '注册'
+    },
+    component: () => import('@/views/register.vue')
+  },
+  {
+    path: '/forgetPwd',
+    meta: {
+      title: '找回密码'
+    },
+    component: () => import('@/views/forget-pwd.vue')
+  },
+  {
+    path: '/',
+    name: 'layout',
+    component: Main,
+    children: [
+      {
+        path: 'home',
+        name: 'home',
+        meta: {
+          title: '首页',
+          icon: 'A'
+        },
+        component: () => import('@/views/home.vue')
+      },
+      {
+        path: 'menu',
+        name: 'menu',
+        meta: {
+          title: '菜品管理',
+          icon: 'A'
+        },
+        component: () => import('@/views/menu.vue')
+      }
+    ]
   },
   {
     path: '/401',

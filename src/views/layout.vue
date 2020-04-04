@@ -61,9 +61,7 @@ export default {
     },
     ...mapState({
       tabList: state => state.tabNav.tabList,
-      routers: state => state.router.routers.filter(item => {
-        return item.name
-      })
+      routers: state => state.router.routers,
     }),
     userName () {
       return getUser().userName

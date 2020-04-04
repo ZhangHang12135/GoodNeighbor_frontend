@@ -65,7 +65,6 @@ yarn run lint
 |  |   ├─img -- 图片
 |  |   ├─font -- 字体，图标
 |  ├─api -- 接口文件夹
-├─readme-img -- redeme 说明图示
 ├─public -- 项目静态资源文件
 
 ```
@@ -77,8 +76,6 @@ yarn run lint
  - [x] 大数据表格
  - [x] 通用icon-svg
  - [x] echats饼状图和柱形图组件
- - [ ] user组件
- - [ ] 路由面包屑
 ### 缺陷
 - [x] 动态权限加载，f5刷新主页，跳到404
   - 重复添加了\*路由，在beforeEach之前，页面就跳转到了404,过滤掉\*路由即可

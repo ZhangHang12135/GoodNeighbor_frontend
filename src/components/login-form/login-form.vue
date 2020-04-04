@@ -1,7 +1,7 @@
 <template>
   <Form ref="loginForm" :model="form" :rules="rules" @keydown.enter.native="handleSubmit" style="background: transparent;">
-    <FormItem prop="userName">
-      <i-input v-model="form.userName" placeholder="请输入手机号">
+    <FormItem prop="phone">
+      <i-input v-model="form.phone" placeholder="请输入手机号">
         <span slot="prepend">
           <Icon :size="16" type="ios-person"></Icon>
         </span>
@@ -16,7 +16,7 @@
     </FormItem>
     <FormItem>
       <Button @click="handleSubmit" type="info" style="margin-left: 10%;">登录</Button>
-      <Button @click="handleSubmit" type="info" style="float:right;margin-right: 10%;">注册</Button>
+      <Button @click="handleRegister" type="info" style="float:right;margin-right: 10%;">注册</Button>
     </FormItem>
   </Form>
 </template>
@@ -26,13 +26,13 @@ export default {
   data() {
     return {
       form: {
-        userName: 'admin',
+        phone: '',
         password: ''
       }
     }
   },
   props: {
-    userNameRules: {
+    phoneRules: {
       type: Array,
       default: () => {
         return [
@@ -56,7 +56,7 @@ export default {
   computed: {
     rules () {
       return {
-        userName: this.userNameRules,
+        phone: this.phoneRules,
         password: this.passwordRules
       }
     }
@@ -67,11 +67,15 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.$emit('on-success-valid', {
-            userName: this.form.userName,
+            phone: this.form.phone,
             password: this.form.password
           })
         }
       })
+    },
+    handleRegister () {
+      console.log(this.$router)
+      this.$router.push({ path: '/register'})
     }
   }
 }

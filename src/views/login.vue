@@ -4,7 +4,7 @@
       <Card icon="login-in" title="登录" :bordered="true">
         <div class="form-con">
           <login-form @on-success-valid="handleSubmit"></login-form>
-          <p class="login-tip">忘记密码？</p>
+          <div class="login-tip"><router-link to="/forgetPwd">忘记密码？</router-link></div>
         </div>
       </Card>
     </div>

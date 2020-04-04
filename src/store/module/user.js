@@ -1,11 +1,10 @@
-import { login, authorization, getUserInfo } from '@/api/user'
+import { login, getUserInfo } from '@/api/user'
 import { setToken, getToken, setUser } from '@/lib/util'
 
 export default {
   state: {
     userName: '',
     avatarImgPath: '',
-    rules: {},
     token: getToken()
   },
   mutations: {
@@ -14,9 +13,6 @@ export default {
     },
     SET_IMG (state, img) {
       state.avatarImgPath = img
-    },
-    SET_RULES (state, rules) {
-      state.rules = rules
     },
     SET_TOKEN (state, token) {
       state.token = token
@@ -33,22 +29,6 @@ export default {
             resolve()
           } else {
             reject(new Error('错误---error'))
-          }
-        }).catch(error => {
-          reject(error)
-        })
-      })
-    },
-    authorization ({ commit }, token) {
-      return new Promise((resolve, reject) => {
-        authorization(token).then(res => {
-          // 401证明权限不足，或者token不对
-          if (parseInt(res.code) === 401) {
-            reject(new Error('token error'))
-          } else {
-            commit('SET_TOKEN', res.data.token)
-            commit('SET_RULES', res.data.rules)
-            resolve(res.data.rules.page)
           }
         }).catch(error => {
           reject(error)

@@ -11,12 +11,6 @@ export const login = ({ userName, password }) => {
   })
 }
 
-export const authorization = () => {
-  return axios.request({
-    url: 'http://192.168.0.105:7001/authorization',
-    method: 'get'
-  })
-}
 
 export const getUserInfo = (token) => {
   console.log('发送请求')

@@ -1,24 +1,26 @@
-import { routes, routerMap } from '@/router/router'
+import { routes, routeMap } from '@/router/router'
 
 /**
  * @description 筛选出可访问页面
  * @param {Object} routes 路由实例列表
  * @param {Object} rules 可访问路由列表
  */
-const getAccesRouterList = (routes, rules) => {
+const getAccesRouterList = (routes) => {
   return routes.filter(item => {
     // 这里过滤掉没有name字段的，就把*路由过滤掉了,
     // 这样在路由渲染之前，没有404页面的，就不会先跳到404页面
     // mmp,搞了两天
-    if (item.name && rules[item.name]) {
-      if (item.children) item.children = getAccesRouterList(item.children, rules)
+    if (item.name) {
+      if (item.children) item.children = getAccesRouterList(item.children)
       return true
     } else return false
   })
 }
+// const routesState = getAccesRouterList(routes);
+// console.log(routesState)
 export default {
   state: {
-    routers: routes,
+    routers: routeMap,
     hasGetRules: false
   },
   mutations: {
@@ -32,17 +34,11 @@ export default {
     /**
      * @param { rules } (规则，可访问页面列表)路由权限列表
      */
-    concatRoutes ({ state, commit }, rules) {
+    concatRoutes ({ state, commit }) {
       return new Promise((resolve, reject) => {
         try {
           let routerList = []
-          // if (Object.entries(rules).every(item => item[1])) {
-          // 所有路由都可用
-          // 这里不能这样写，如果存在不存在路由呢
-          // routerList = routerMap
-          // } else {
           routerList = getAccesRouterList(routerMap, rules)
-          // }
           commit('CONCAT_ROUTES', routerList)
           resolve(state.routers)
         } catch (err) {
