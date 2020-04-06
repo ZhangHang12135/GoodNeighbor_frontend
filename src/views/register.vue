@@ -3,7 +3,7 @@
     <div class="register-con">
       <Card icon="register-in" title="注册" :bordered="true">
         <div class="form-con">
-            <Form ref="loginForm" :model="form" :rules="rules" @keydown.enter.native="handleRegister">
+            <Form ref="registerForm" :model="form" :rules="rules" @keydown.enter.native="handleRegister">
               <FormItem label="手机号" prop="phone">
                 <i-input v-model="form.phone" placeholder="请输入手机号">
                 </i-input>
@@ -61,7 +61,7 @@ export default {
   methods:{
     handleRegister () {
       // 这里的valid是个Boolean，满足规则就是true
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.registerForm.validate((valid) => {
         if (valid) {
           register(this.form).then((res)=>{
             this.$Message.success('注册成功！')
@@ -97,8 +97,5 @@ export default {
     .form-con{
       padding: 10px 0 0;
     }
-}
-.dp-flex{
-  display: flex;
 }
 </style>
