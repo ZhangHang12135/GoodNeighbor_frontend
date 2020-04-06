@@ -1,8 +1,8 @@
 import axios from './index'
-
+import { baseURL } from '@/config'
 export const login = ({ userName, password }) => {
   return axios.request({
-    url: 'http://192.168.0.105:7001/login',
+    url: baseURL + 'login',
     data: {
       userName,
       password
@@ -12,12 +12,19 @@ export const login = ({ userName, password }) => {
 }
 
 
-export const getUserInfo = (token) => {
-  console.log('发送请求')
+export const register = (form) => {
   return axios.request({
-    url: 'http://192.168.0.105:7001/getUserInfo',
-    params: {
-      token
+    url: baseURL + 'register',
+    data: form,
+    method: 'post'
+  })
+}
+
+export const verify = (phone) => {
+  return axios.request({
+    url: baseURL + 'verify',
+    params:{
+      phone: phone
     },
     method: 'get'
   })

@@ -74,7 +74,6 @@ export default {
       })
     },
     handleRegister () {
-      console.log(this.$router)
       this.$router.push({ path: '/register'})
     }
   }

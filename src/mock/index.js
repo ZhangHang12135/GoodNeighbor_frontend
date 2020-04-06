@@ -13,4 +13,9 @@ Mock.mock(/\/getUserInfo/, 'get', getUserInfo)
 Mock.mock(/\/authorization/, 'get', authorization)
 Mock.mock(/\/getTableData/, 'post', getTableData)
 Mock.mock(/\/getBigData/, 'post', getBigData)
+Mock.mock(/\/register/, 'post', ()=>{
+  return {
+    data: 'ok'
+  }
+})
 export default Mock

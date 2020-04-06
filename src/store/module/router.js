@@ -1,4 +1,4 @@
-import { routes, routeMap } from '@/router/router'
+import { routes } from '@/router/router'
 
 /**
  * @description 筛选出可访问页面
@@ -16,11 +16,11 @@ const getAccesRouterList = (routes) => {
     } else return false
   })
 }
-// const routesState = getAccesRouterList(routes);
+const routesState = getAccesRouterList(routes);
 // console.log(routesState)
 export default {
   state: {
-    routers: routeMap,
+    routers: routesState,
     hasGetRules: false
   },
   mutations: {

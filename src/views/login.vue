@@ -1,17 +1,20 @@
 <template>
   <div class="login">
-    <div class="login-con">
-      <Card icon="login-in" title="登录" :bordered="true">
-        <div class="form-con">
-          <login-form @on-success-valid="handleSubmit"></login-form>
-          <div class="login-tip"><router-link to="/forgetPwd">忘记密码？</router-link></div>
-        </div>
-      </Card>
-    </div>
+    <layout-gn></layout-gn>
+      <div class="login-con">
+        <Card icon="login-in" title="登录" :bordered="true">
+          <div class="form-con">
+            <login-form @on-success-valid="handleSubmit"></login-form>
+            <div class="login-tip"><router-link to="/forgetPwd">忘记密码？</router-link></div>
+          </div>
+        </Card>
+      </div>
   </div>
+
 </template>
 <script>
 import LoginForm from '_c/login-form'
+import LayoutGn from '_c/layout-gn'
 import { mapActions } from 'vuex'
 import store from '@/store'
 export default {
@@ -23,7 +26,8 @@ export default {
     }
   },
   components: {
-    LoginForm
+    LoginForm,
+    LayoutGn
   },
   methods: {
     ...mapActions([
