@@ -1,24 +1,57 @@
 <template>
   <layout-gn>
+    <div class="step">
+      <Steps :current='current'>
+        <Step title="手机注册" icon="ios-phone-portrait"></Step>
+        <Step title="基本信息" icon="ios-list-box"></Step>
+        <Step title="实名认证" icon="ios-person"></Step>
+      </Steps>
+    </div>
     <div class="register-con">
-      <Card icon="register-in" title="注册" :bordered="true">
+      <Card icon="register-in" :title="titles[current]" :bordered="true">
         <div class="form-con">
             <Form ref="registerForm" :model="form" :rules="rules" @keydown.enter.native="handleRegister">
-              <FormItem label="手机号" prop="phone">
-                <i-input v-model="form.phone" placeholder="请输入手机号">
-                </i-input>
-              </FormItem>
-              <FormItem label="密码" prop="password">
-                <i-input type="password" v-model="form.password" placeholder="请输入密码">
-                </i-input>
-              </FormItem>
-              <FormItem label="验证码" prop="validata">
-                  <i-input v-model="form.validata" placeholder="请输入验证码">
-                    <Button :disabled='valiBoolean' slot="append" style="background: #2db7f5;color:#fff" @click="handleValidate">{{`${!valiBoolean?'发送验证码': validate + 'S'}`}}</Button>
+              <template v-if="current==0">
+                <FormItem label="手机号" prop="phone">
+                  <i-input v-model="form.phone" placeholder="请输入手机号">
                   </i-input>
-              </FormItem>
+                </FormItem>
+                <FormItem label="密码" prop="password">
+                  <i-input type="password" v-model="form.password" placeholder="请输入密码">
+                  </i-input>
+                </FormItem>
+                <FormItem label="验证码" prop="validata">
+                    <i-input v-model="form.validata" placeholder="请输入验证码">
+                      <Button :disabled='valiBoolean' slot="append" style="background: #2db7f5;color:#fff" @click="handleValidate">{{`${!valiBoolean?'发送验证码': validate + 'S'}`}}</Button>
+                    </i-input>
+                </FormItem>
+              </template>
+              <template v-if="current==1">
+                 <FormItem label="姓名" prop="name">
+                  <i-input v-model="form.name">
+                  </i-input>
+                </FormItem>
+                <FormItem label="餐厅地址(社区)" prop="adress">
+                  <i-input v-model="form.address">
+                  </i-input>
+                </FormItem>
+                <FormItem label="配送人" prop="rider">
+                  <i-input v-model="form.rider">
+                  </i-input>
+                </FormItem>
+                <FormItem label="配送人电话" prop="riderPhone">
+                  <i-input v-model="form.riderPhone">
+                  </i-input>
+                </FormItem>
+              </template>
+              <template v-if="current==2">
+                <FormItem prop="pics">
+                  <p>请上传身份证正反面照片</p>
+                  <img-upload width='80px' height="80px" :pics='form.pics'></img-upload>
+                </FormItem>
+              </template>
               <FormItem>
-                <Button @click="handleRegister" type="info" size="large" style="width:50%;left:25%;position:absolute;">注册</Button>
+                <Button @click="handleRegister" type="info" size="large" style="width:50%;left:25%;position:absolute;">{{ current==2?'完成':'下一步'}}</Button>
               </FormItem>
             </Form>
         </div>
@@ -28,20 +61,29 @@
 </template>
 <script>
 import LayoutGn from '_c/layout-gn'
+import ImgUpload from '_c/img-upload'
 import { register, verify } from '@/api/user'
 export default {
   name: 'register',
   components: {
-    LayoutGn
+    LayoutGn,
+    ImgUpload
   },
   data() {
     return {
       validate: 60,
       valiBoolean: false,
+      current: 0,
+      titles: ['手机注册','基本信息','实名认证'],
       form: {
         phone: '',
         password: '',
         validata: '',
+        name: '',
+        address: '',
+        rider: '',
+        riderPhone: '',
+        pics: []
       },
       rules: {
         phone: [
@@ -63,10 +105,14 @@ export default {
       // 这里的valid是个Boolean，满足规则就是true
       this.$refs.registerForm.validate((valid) => {
         if (valid) {
-          register(this.form).then((res)=>{
-            this.$Message.success('注册成功！')
-            this.$router.push({ path: '/login'})
-          })
+          if(this.current == 2){
+            register(this.form).then((res)=>{
+              this.$Message.success('注册成功！')
+              this.$router.push({ path: '/login'})
+            })
+          }else{
+            this.current++;
+          }
         }
       })
     },
@@ -88,10 +134,16 @@ export default {
 }
 </script>
 <style lang="less" scope>
+.step{
+    position: absolute;
+    left: 20%;
+    top: 15%;
+    width: 80%;
+}
 .register-con{
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 60%;
     transform: translate(-50%,-50%);
     width: 370px;
     .form-con{

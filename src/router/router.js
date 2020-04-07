@@ -40,13 +40,21 @@ export const routes = [
     ]
   },
   {
-    path: 'menu',
-    name: 'menu',
-    meta: {
-      title: '菜品管理',
-      icon: 'A'
-    },
-    component: () => import('@/views/menu.vue')
+    path: '/',
+    name: '_menu',
+    component: Main,
+    children: [
+      {
+        path: 'menu',
+        name: 'menu',
+        meta: {
+          title: '菜品管理',
+          icon: 'A'
+      },
+      component: () => import('@/views/menu.vue')
+    }
+    ]
+
   },
   {
     path: '/401',

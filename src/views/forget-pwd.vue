@@ -7,7 +7,7 @@
       </Steps>
     </div>
     <div class="forget-con">
-      <Card icon="register-in" title="注册" :bordered="true">
+      <Card icon="register-in" title="密码重置" :bordered="true">
         <div class="form-con">
             <Form ref="forgetForm" :model="form" :rules="rules" @keydown.enter.native="handleNext">
               <FormItem label="手机号" prop="phone" v-if="!next">
@@ -93,7 +93,6 @@ export default {
           this.next = true;
         }
       })
-
     }
   }
 }

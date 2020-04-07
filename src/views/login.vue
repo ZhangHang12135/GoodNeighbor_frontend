@@ -37,10 +37,8 @@ export default {
     handleSubmit ({userName, password}) {
       this.login({userName, password}).then(res => {
         // 这里的actions没有传值，所以res为空
-        this.getUserInfo(userName).then(res => {
           this.$router.push({
             name: 'home'
-        })
         })
       })
     }
