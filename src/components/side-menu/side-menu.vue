@@ -20,14 +20,14 @@
         v-else-if="item.children && item.children.length === 1"
         :key="`menu_${item.children[0].name}`"
         :name="item.children[0].name">
-        <icon-svg :size="20" :icon="item.children[0].meta.icon"></icon-svg>
+        <Icon :size="20" :type="item.children[0].meta.icon"></Icon>
         {{ item.children[0].meta.title }}
         </menu-item>
         <menu-item
         v-else
         :key="`menu_${item.name}`"
         :name="item.name">
-        <icon-svg :size="20" :icon="item.meta.icon"></icon-svg>
+        <Icon :size="20" :type="item.meta.icon"></Icon>
         {{ item.meta.title }}
         </menu-item>
       </template>
@@ -48,7 +48,7 @@
         placement="right"
         :key="`drop_${item.children[0].name}`">
           <span @click="handleClick(item.children[0].name)" class="drop-menu-span">
-            <icon-svg :size="20" :icon="item.children[0].meta.icon"></icon-svg>
+            <Icon :size="20" :type="item.children[0].meta.icon"></Icon>
           </span>
         </Tooltip>
         <Tooltip
@@ -58,7 +58,7 @@
         placement="right"
         :key="`drop_${item.name}`">
           <span @click="handleClick(item.name)" class="drop-menu-span">
-            <icon-svg :size="20" :icon="item.meta.icon"></icon-svg>
+            <Icon :size="20" :type="item.meta.icon"></Icon>
           </span>
         </Tooltip>
       </template>

@@ -33,7 +33,7 @@ export const routes = [
         name: 'home',
         meta: {
           title: '首页',
-          icon: 'A'
+          icon: 'ios-home'
         },
         component: () => import('@/views/home.vue')
       }
@@ -49,12 +49,26 @@ export const routes = [
         name: 'menu',
         meta: {
           title: '菜品管理',
-          icon: 'A'
+          icon: 'ios-paper'
       },
       component: () => import('@/views/menu.vue')
     }
     ]
-
+  },
+  {
+    path: '/',
+    component: Main,
+    children: [
+      {
+        path: 'user-center',
+        name: 'usercenter',
+        meta: {
+          title: '个人中心',
+          icon: 'ios-person'
+      },
+      component: () => import('@/views/user-center.vue')
+    }
+    ]
   },
   {
     path: '/401',
