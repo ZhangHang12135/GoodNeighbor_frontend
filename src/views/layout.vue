@@ -11,7 +11,7 @@
         <Header class="header-wrapper">
           <Icon :class="triggerClasses"  type="md-menu" :size="32" @click.native="handleCollapsed" />
           <div style="float:right">
-            <user></user>
+            <user :name='user.name'></user>
           </div>
         </Header>
         <Content class="content-con">
@@ -62,13 +62,8 @@ export default {
     ...mapState({
       tabList: state => state.tabNav.tabList,
       routers: state => state.router.routers,
-    }),
-    userName () {
-      return getUser().userName
-    },
-    avatarImgPath () {
-      return getUser().avatarImgPath
-    }
+      user: state => state.user.user
+    })
   },
   methods: {
     ...mapActions([

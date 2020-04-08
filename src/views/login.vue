@@ -21,7 +21,7 @@ export default {
   name: 'login_page',
   data() {
     return {
-      userName: '',
+      phone: '',
       password: ''
     }
   },
@@ -32,11 +32,9 @@ export default {
   methods: {
     ...mapActions([
       'login',
-      'getUserInfo'
     ]),
-    handleSubmit ({userName, password}) {
-      this.login({userName, password}).then(res => {
-        // 这里的actions没有传值，所以res为空
+    handleSubmit ({phone, password}) {
+      this.login({phone, password}).then(res => {
           this.$router.push({
             name: 'home'
         })

@@ -38,7 +38,7 @@ export default {
       })
     },
     userCenter () {
-      this.$router.push('user-center');
+      this.$router.push({ name: 'usercenter'});
     },
     handleClick (name) {
       switch (name) {

@@ -2,7 +2,7 @@
   <Card :shadow="shadow" class="info-card-wrapper" :padding="0">
     <div class="info-content-con">
       <div class="left-area" :style="{background: color,width: leftWidth}">
-        <icon-svg :icon="icon" :size="iconSize" class="icon-svg"></icon-svg>
+        <Icon :icon="icon" :size="iconSize" class="icon-svg"></Icon>
       </div>
       <div class="right-area" :style="{width: rightWidth}">
         <div>

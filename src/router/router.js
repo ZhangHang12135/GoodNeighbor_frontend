@@ -40,19 +40,32 @@ export const routes = [
     ]
   },
   {
-    path: '/',
-    name: '_menu',
+    path: '/menu',
+    name: 'menu',
     component: Main,
+    meta: {
+      title: '菜品管理',
+      icon: 'ios-paper'
+    },
     children: [
       {
-        path: 'menu',
-        name: 'menu',
+        path: 'add-menu',
+        name: 'add-menu',
         meta: {
-          title: '菜品管理',
-          icon: 'ios-paper'
+          title: '新增菜品',
+          icon: 'md-add-circle'
+        },
+        component: () => import('@/views/menu/add-menu.vue')
       },
-      component: () => import('@/views/menu.vue')
-    }
+      {
+        path: 'menu-list',
+        name: 'menu-list',
+        meta: {
+          title: '所有菜品',
+          icon: 'ios-apps'
+        },
+        component: () => import('@/views/menu/menu-list.vue')
+      },
     ]
   },
   {

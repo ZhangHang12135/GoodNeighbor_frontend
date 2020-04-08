@@ -1,16 +1,15 @@
 import axios from './index'
 import { baseURL } from '@/config'
-export const login = ({ userName, password }) => {
+export const login = ({ phone, password }) => {
   return axios.request({
     url: baseURL + 'login',
     data: {
-      userName,
+      phone,
       password
     },
     method: 'post'
   })
 }
-
 
 export const register = (form) => {
   return axios.request({

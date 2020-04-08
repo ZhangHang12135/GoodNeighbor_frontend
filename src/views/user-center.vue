@@ -1,11 +1,16 @@
 <template>
   <div>
-    个人中心
+    {{ user.name }}
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
-
+  computed: {
+    ...mapState({
+      user: state => state.user.user
+    })
+  }
 }
 </script>
 
