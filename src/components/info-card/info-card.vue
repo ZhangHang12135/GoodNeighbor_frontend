@@ -1,14 +1,9 @@
 <template>
-  <Card :shadow="shadow" class="info-card-wrapper" :padding="0">
+  <Card class="info-card-wrapper" :padding="0" :title="title">
+    <p slot="extra" style="color: red">{{ price }} ￥</p>
     <div class="info-content-con">
-      <div class="left-area" :style="{background: color,width: leftWidth}">
-        <Icon :icon="icon" :size="iconSize" class="icon-svg"></Icon>
-      </div>
-      <div class="right-area" :style="{width: rightWidth}">
-        <div>
-          <slot></slot>
-        </div>
-      </div>
+      <img :src="pic" alt="菜品图片">
+      <p>{{ desc }}</p>
     </div>
   </Card>
 </template>
@@ -16,74 +11,38 @@
 export default {
   name: 'InfoCard',
   props:{
-    left: {
-      type: Number,
-      default: 36
-    },
-    color: {
+    title: {
       type: String,
-      default: '#2d8cf0'
+      default: '菜名'
     },
-    icon:{
-      type: String,
-      default: ''
-    },
-    iconSize: {
+    price: {
       type: Number,
-      default: 20
+      default: 0
     },
-    shadow: {
-      type: Boolean,
-      default: false
+    desc: {
+      type: String,
+      default: '一句话描述菜品'
+    },
+    pic: {
+      type: String,
+      default: "http://blog.wyw99.cn/2019/11/28/%E3%80%8Acss%E9%80%89%E6%8B%A9%E5%99%A8%E4%B8%96%E7%95%8C%E3%80%8B%E6%80%BB%E7%BB%93/cover.jpg"
     }
   },
-  computed: {
-    leftWidth () {
-      return `${this.left}%`
-    },
-    rightWidth () {
-      return `${100 - this.left}%`
-    }
-  }
 }
 </script>
 <style lang="less">
-.common{
-  float: left;
-  height: 100%;
-  display: table;
-  text-align: center;
-}
-.size{
-  width: 100%;
-  height: 100%;
-}
-.middle-center{
-  display: table-cell;
-  vertical-align: middle;
-}
 .info-card-wrapper{
-  .size;
   overflow: hidden;
-  .ivu-card-body{
-    .size;
+  display: inline-block;
+  width: 320px;
+  margin: 20px;
+  padding: 10px;
+  img{
+    width: 100%;
   }
   .info-content-con{
-    .size;
-    position: relative;
-    .left-area{
-      .common;
-      & > .icon-svg{
-        .middle-center;
-        height: 100%;
-        margin: auto auto;
-      }
-    }
-    .right-area{
-      .common;
-      & > div{
-        .middle-center;
-      }
+    p{
+      margin: 10px 0;
     }
   }
 }

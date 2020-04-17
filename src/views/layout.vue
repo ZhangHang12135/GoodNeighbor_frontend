@@ -34,14 +34,14 @@
 import SideMenu from '_c/side-menu'
 import User from '_c/user'
 import { mapState, mapActions, mapMutations } from 'vuex'
-import { getUser, getTabNameByRoute, getRouteById } from '@/lib/util'
+import { getTabNameByRoute, getRouteById } from '@/lib/util'
 export default {
   name: 'layout',
   components: {
     SideMenu,
     User
   },
-  data() {
+  data () {
     return {
       collapsed: false,
       getTabNameByRoute
@@ -86,8 +86,8 @@ export default {
             <span>{item.meta.title}</span>
             {
               item.name !== 'home'
-              ? <icon nativeOn-click={this.handleTabRemove.bind(this,getTabNameByRoute(item))} type="md-close-circle" class="tab-close"/>
-              : ''
+                ? <icon nativeOn-click={this.handleTabRemove.bind(this, getTabNameByRoute(item))} type="md-close-circle" class="tab-close"/>
+                : ''
             }
           </div>
         )
@@ -165,5 +165,3 @@ export default {
   }
 }
 </style>
-
-

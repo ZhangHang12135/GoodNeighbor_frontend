@@ -18,4 +18,14 @@ Mock.mock(/\/register/, 'post', ()=>{
     data: 'ok'
   }
 })
+Mock.mock(/\/getMenuList/, 'get', ()=>{
+  return {
+    data: [
+      {title:'1', desc: '123', price: 2},
+      {title:'3', desc: '123', price: 2},
+      {title:'2', desc: '123', price: 2},
+      {title:'1', desc: '123', price: 2}
+    ]
+  }
+})
 export default Mock

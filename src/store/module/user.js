@@ -1,5 +1,5 @@
 import { login } from '@/api/user'
-import { setToken, getToken, setUser } from '@/lib/util'
+import { setToken, setUser } from '@/lib/util'
 
 export default {
   state: {
@@ -8,11 +8,11 @@ export default {
       name: '',
       address: '',
       rider: '',
-      riderPhone: '',
+      riderPhone: ''
     }
   },
   mutations: {
-    SET_USER(state, user) {
+    SET_USER (state, user) {
       state.user = user
     },
     SET_TOKEN (state, token) {

@@ -69,12 +69,12 @@ export default {
     LayoutGn,
     ImgUpload
   },
-  data() {
+  data () {
     return {
       validate: 60,
       valiBoolean: false,
       current: 0,
-      titles: ['手机注册','基本信息','实名认证'],
+      titles: ['手机注册', '基本信息', '实名认证'],
       form: {
         phone: '',
         password: '',
@@ -88,11 +88,11 @@ export default {
       rules: {
         phone: [
           { required: true, message: '手机号不能为空', trigger: 'blur' },
-          { pattern: /^1[3456789]\d{9}$/, message: '请输入正确手机号', trigger: 'change'}
+          { pattern: /^1[3456789]\d{9}$/, message: '请输入正确手机号', trigger: 'change' }
         ],
         password: [
           { required: true, message: '密码不能为空', trigger: 'blur' },
-          { type: 'string', min: 6, message: '密码不能少于6位', trigger: 'change'}
+          { type: 'string', min: 6, message: '密码不能少于6位', trigger: 'change' }
         ],
         validata: [
           { required: true, message: '请输入验证码', trigger: 'blur' }
@@ -100,35 +100,35 @@ export default {
       }
     }
   },
-  methods:{
+  methods: {
     handleRegister () {
       // 这里的valid是个Boolean，满足规则就是true
       this.$refs.registerForm.validate((valid) => {
         if (valid) {
-          if(this.current == 2){
-            register(this.form).then((res)=>{
+          if (this.current === 2) {
+            register(this.form).then((res) => {
               this.$Message.success('注册成功！')
-              this.$router.push({ path: '/login'})
+              this.$router.push({ path: '/login' })
             })
-          }else{
-            this.current++;
+          } else {
+            this.current++
           }
         }
       })
     },
     handleValidate () {
-      verify(this.form.phone);
-      this.valiBoolean = true;
-      let time = 60;
+      verify(this.form.phone)
+      this.valiBoolean = true
+      let time = 60
       let timer = setInterval(() => {
-        if(time == 1){
-          clearInterval(timer);
-          this.valiBoolean = false;
-        }else{
-          time--;
-          this.validate = time;
+        if (time === 1) {
+          clearInterval(timer)
+          this.valiBoolean = false
+        } else {
+          time--
+          this.validate = time
         }
-      }, 1000);
+      }, 1000)
     }
   }
 }

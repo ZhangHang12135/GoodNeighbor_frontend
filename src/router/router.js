@@ -65,7 +65,7 @@ export const routes = [
           icon: 'ios-apps'
         },
         component: () => import('@/views/menu/menu-list.vue')
-      },
+      }
     ]
   },
   {
@@ -78,9 +78,9 @@ export const routes = [
         meta: {
           title: '个人中心',
           icon: 'ios-person'
-      },
-      component: () => import('@/views/user-center.vue')
-    }
+        },
+        component: () => import('@/views/user-center.vue')
+      }
     ]
   },
   {
