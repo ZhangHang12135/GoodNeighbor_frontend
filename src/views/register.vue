@@ -20,8 +20,8 @@
                   <i-input type="password" v-model="form.password" placeholder="请输入密码">
                   </i-input>
                 </FormItem>
-                <FormItem label="验证码" prop="validata">
-                    <i-input v-model="form.validata" placeholder="请输入验证码">
+                <FormItem label="验证码" prop="velidata">
+                    <i-input v-model="form.velidata" placeholder="请输入验证码">
                       <Button :disabled='valiBoolean' slot="append" style="background: #2db7f5;color:#fff" @click="handleValidate">{{`${!valiBoolean?'发送验证码': validate + 'S'}`}}</Button>
                     </i-input>
                 </FormItem>
@@ -62,7 +62,8 @@
 <script>
 import LayoutGn from '_c/layout-gn'
 import ImgUpload from '_c/img-upload'
-import { register, verify } from '@/api/user'
+import { register } from '@/api/user'
+import { sendVelidata, verify } from '@/api/verify'
 export default {
   name: 'register',
   components: {
@@ -78,7 +79,7 @@ export default {
       form: {
         phone: '',
         password: '',
-        validata: '',
+        velidata: '',
         name: '',
         address: '',
         rider: '',
@@ -110,14 +111,27 @@ export default {
               this.$Message.success('注册成功！')
               this.$router.push({ path: '/login' })
             })
+          } else if(this.current === 0){
+            console.log(this.form.phone, this.form.velidata)
+            verify(this.form.phone, this.form.velidata).then((res)=>{
+              this.$Message.success(res)
+              this.current++;
+            }).catch((err)=>{
+                this.$Message.info({
+                content: err,
+                duration: 5
+            });
+            })
           } else {
-            this.current++
+            this.current++;
           }
         }
       })
     },
     handleValidate () {
-      verify(this.form.phone)
+      sendVelidata(this.form.phone).then((res)=>{
+        this.$Message.success(res)
+      })
       this.valiBoolean = true
       let time = 60
       let timer = setInterval(() => {

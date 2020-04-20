@@ -37,7 +37,8 @@
 </template>
 <script>
 import LayoutGn from '_c/layout-gn'
-import { verify } from '@/api/user'
+import { sendVelidata, verify } from '@/api/verify'
+import { updatePassword } from '@/api/user'
 export default {
   name: 'ForgetPwd',
   components: { LayoutGn },
@@ -69,7 +70,11 @@ export default {
   },
   methods: {
     handleValidate () {
-      verify(this.form.phone);
+      sendVelidata(this.form.phone).then((res)=>{
+        this.$Message.success(res);
+      }).catch((err)=>{
+        this.$Message.error(err);
+      });
       this.valiBoolean = true;
       let time = 60;
       let timer = setInterval(() => {
@@ -86,11 +91,23 @@ export default {
       this.$refs.forgetForm.validate((valid) => {
         if (valid) {
           if(this.next){
-            this.$Message.success('密码重置成功');
-            this.$router.push({path: '/login'})
+            console.log('准备')
+            updatePassword(this.form.phone, this.form.password).then((res)=>{
+              console.log('wanc')
+              this.$Message.success(res);
+              this.$router.push({path: '/login'})
+            }).catch((err)=>{
+              this.$Message.error(err);
+            })
+          }else{
+            verify(this.form.phone, this.form.validata).then((res=>{
+              this.$Message.success(res);
+              this.current = 1;
+              this.next = true;
+            })).catch(err=>{
+              this.$Message.error(err);
+            })
           }
-          this.current = 1;
-          this.next = true;
         }
       })
     }

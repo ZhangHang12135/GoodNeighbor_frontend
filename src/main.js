@@ -5,7 +5,7 @@ import store from './store'
 import iview from 'iview'
 import 'iview/dist/styles/iview.css'
 
-require('./mock')
+// require('./mock')
 Vue.config.productionTip = false
 Vue.use(iview)
 

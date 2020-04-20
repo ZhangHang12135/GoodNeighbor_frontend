@@ -1,5 +1,6 @@
 import axios from './index'
 import { baseURL } from '@/config'
+
 export const login = ({ phone, password }) => {
   return axios.request({
     url: baseURL + 'login',
@@ -19,12 +20,14 @@ export const register = (form) => {
   })
 }
 
-export const verify = (phone) => {
+export const updatePassword = (phone, password) => {
   return axios.request({
-    url: baseURL + 'verify',
-    params:{
-      phone: phone
+    url: baseURL + 'updatePassword',
+    data: {
+      phone,
+      password
     },
-    method: 'get'
+    method: 'post'
   })
 }
+
