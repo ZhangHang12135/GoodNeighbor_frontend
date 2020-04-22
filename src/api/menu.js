@@ -1,9 +1,10 @@
 import axios from './index'
 import { baseURL } from '@/config'
 
-export const addMenu = (menuItem) => {
+export const addMenu = (menuItem, uId) => {
   return axios.request({
     url: baseURL + 'addMenu',
+    params: { uId },
     data: menuItem,
     method: 'post'
   })
@@ -12,8 +13,8 @@ export const addMenu = (menuItem) => {
 export const getMenuList = (uId) => {
   return axios.request({
     url: baseURL + 'getMenuList',
-    parms: {
-      uId: uId
+    params: {
+      uId
     },
     method: 'get'
   })

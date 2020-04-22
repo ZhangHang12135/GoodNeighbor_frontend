@@ -34,7 +34,7 @@
 import SideMenu from '_c/side-menu'
 import User from '_c/user'
 import { mapState, mapActions, mapMutations } from 'vuex'
-import { getTabNameByRoute, getRouteById } from '@/lib/util'
+import { getUser, getTabNameByRoute, getRouteById } from '@/lib/util'
 export default {
   name: 'layout',
   components: {
@@ -62,8 +62,10 @@ export default {
     ...mapState({
       tabList: state => state.tabNav.tabList,
       routers: state => state.router.routers,
-      user: state => state.user.user
-    })
+    }),
+    user () {
+      return getUser()
+    }
   },
   methods: {
     ...mapActions([
@@ -103,8 +105,6 @@ export default {
         this.$router.push(nextRoute)
       })
     }
-  },
-  mounted () {
   }
 }
 </script>

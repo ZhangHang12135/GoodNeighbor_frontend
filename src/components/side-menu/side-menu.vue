@@ -88,12 +88,10 @@ export default {
   },
   methods: {
     handleSelect (name) {
-      if (name === 'blog') window.open('https://zhanghang12135.github.io/', '_blank')
-      else this.$router.push({ name })
+      this.$router.push({ name })
     },
     handleClick (name) {
-      if (name === 'blog') window.open('https://zhanghang12135.github.io/', '_blank')
-      else this.$router.push({ name })
+      this.$router.push({ name })
     }
   },
   computed: {
@@ -111,9 +109,6 @@ export default {
         this.$refs.menu.updateOpened()
       })
     }
-  },
-  mounted () {
-    console.log(this.list)
   }
 }
 </script>

@@ -4,7 +4,6 @@ import { routes } from './router'
 import { setTitle } from '@/lib/util'
 Vue.use(Router)
 
-console.log(routes)
 const router = new Router({
   mode: 'history',
   routes

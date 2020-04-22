@@ -1,7 +1,7 @@
 <template>
   <div>
     <info-card v-for="(item, index) in menus" :key="index"
-    :title="item.title"
+    :title="item.name"
     :pic="item.pic"
     :price="item.price"
     :desc="item.desc"></info-card>
@@ -10,6 +10,7 @@
 <script>
 import infoCard from '_c/info-card'
 import { getMenuList } from '@/api/menu'
+import { getUser } from '@/lib/util'
 export default {
   components: { infoCard },
   data () {
@@ -17,11 +18,16 @@ export default {
       menus: []
     }
   },
+  computed: {
+    user () {
+      return getUser();
+    }
+  },
   created () {
-    getMenuList().then((res) => {
-      this.menus = res.data;
+    getMenuList(this.user.uId).then((res) => {
+      this.menus = res;
     }).catch((err)=>{
-      console.log('获取菜单列表失败')
+      this.$Message.error('获取数据失败')
     })
   }
 }

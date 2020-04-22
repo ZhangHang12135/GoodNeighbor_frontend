@@ -4,6 +4,7 @@ import { setToken, setUser } from '@/lib/util'
 export default {
   state: {
     user: {
+      uId: '',
       phone: '',
       name: '',
       address: '',
@@ -14,6 +15,7 @@ export default {
   mutations: {
     SET_USER (state, user) {
       state.user = user
+      setUser(user)
     },
     SET_TOKEN (state, token) {
       state.token = token

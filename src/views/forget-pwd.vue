@@ -91,9 +91,7 @@ export default {
       this.$refs.forgetForm.validate((valid) => {
         if (valid) {
           if(this.next){
-            console.log('准备')
             updatePassword(this.form.phone, this.form.password).then((res)=>{
-              console.log('wanc')
               this.$Message.success(res);
               this.$router.push({path: '/login'})
             }).catch((err)=>{

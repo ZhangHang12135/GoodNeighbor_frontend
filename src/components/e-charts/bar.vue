@@ -25,7 +25,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.barColor)
     this.$nextTick(() =>{
       // 横坐标
       let xAxisData = Object.keys(this.value)

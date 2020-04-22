@@ -2,7 +2,7 @@
     <div>
       <Card title="添加菜品" :bordered="true" class="addmenu-body">
         <div class="form-con">
-            <Form ref="addMenuForm" :model="form" :rules="rules" @keydown.enter.native="handleAddMenu">
+            <Form ref="addMenuForm" :model="form" :rules="rules">
               <FormItem label="菜品名称" prop="name">
                 <i-input v-model="form.name" placeholder="请输入菜名">
                 </i-input>
@@ -30,6 +30,7 @@
 <script>
 import imgUpload from '_c/img-upload'
 import { addMenu } from '@/api/menu'
+import { getUser } from '@/lib/util'
 export default {
   components: { imgUpload },
   data () {
@@ -50,13 +51,20 @@ export default {
       }
     }
   },
+  computed: {
+    user () {
+      return getUser();
+    }
+  },
   methods: {
     handleAddMenu () {
       this.$refs.addMenuForm.validate((valid) => {
         if (valid) {
-          addMenu(this.form).then((res) => {
+          addMenu(this.form, this.user.uId).then((res) => {
             this.$Message.success('添加成功')
             this.$router.push({ name: 'menu-list' })
+          }).catch(err=>{
+            this.$Message.error(err);
           })
         }
       })

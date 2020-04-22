@@ -69,6 +69,35 @@ export const routes = [
     ]
   },
   {
+    path: '/order',
+    name: 'order',
+    component: Main,
+    meta: {
+      title: '订单管理',
+      icon: 'ios-cube'
+    },
+    children: [
+      {
+        path: 'order-now',
+        name: 'order-now',
+        meta: {
+          title: '当前订单',
+          icon: 'ios-ionic'
+        },
+        component: () => import('@/views/order/order-now.vue')
+      },
+      {
+        path: 'order-list',
+        name: 'order-list',
+        meta: {
+          title: '历史订单',
+          icon: 'ios-list-box'
+        },
+        component: () => import('@/views/order/order-list.vue')
+      }
+    ]
+  },
+  {
     path: '/',
     component: Main,
     children: [
