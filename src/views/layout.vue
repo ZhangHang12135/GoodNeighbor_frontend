@@ -3,7 +3,7 @@
     <Layout class="layout-outer">
       <Sider collapsible hide-trigger breakpoint="sm" v-model="collapsed" class="sider-outer">
         <div class="logo-con">
-          <icon-svg icon="fuchouzhelianmeng" :size="60"></icon-svg>
+          <img src="@/assets/logo.png">
         </div>
         <side-menu :collapsed="collapsed" :list="routers"></side-menu>
       </Sider>
@@ -11,9 +11,7 @@
         <Header class="header-wrapper">
           <Icon :class="triggerClasses"  type="md-menu" :size="32" @click.native="handleCollapsed" />
           <div style="float:right">
-            Welcome --- {{ userName }}
-            <icon-svg :icon="avatarImgPath" :size="32"></icon-svg>
-            <Button @click="handlelogout">退出</Button>
+            <user :name='user.name'></user>
           </div>
         </Header>
         <Content class="content-con">
@@ -34,14 +32,16 @@
 </template>
 <script>
 import SideMenu from '_c/side-menu'
+import User from '_c/user'
 import { mapState, mapActions, mapMutations } from 'vuex'
 import { getUser, getTabNameByRoute, getRouteById } from '@/lib/util'
 export default {
   name: 'layout',
   components: {
-    SideMenu
+    SideMenu,
+    User
   },
-  data() {
+  data () {
     return {
       collapsed: false,
       getTabNameByRoute
@@ -63,16 +63,12 @@ export default {
       tabList: state => state.tabNav.tabList,
       routers: state => state.router.routers,
     }),
-    userName () {
-      return getUser().userName
-    },
-    avatarImgPath () {
-      return getUser().avatarImgPath
+    user () {
+      return getUser()
     }
   },
   methods: {
     ...mapActions([
-      'logout',
       'handleRemove'
     ]),
     ...mapMutations([
@@ -80,17 +76,6 @@ export default {
     ]),
     handleCollapsed () {
       this.collapsed = !this.collapsed
-    },
-    handlelogout () {
-      this.$Modal.confirm({
-        title: '提示',
-        content: '确定登出？',
-        onOk: () => {
-          this.logout().then(res => {
-          this.$router.push({ path: '/login'})
-        })
-        }
-      })
     },
     handleClickTab (id) {
       let route = getRouteById(id)
@@ -103,8 +88,8 @@ export default {
             <span>{item.meta.title}</span>
             {
               item.name !== 'home'
-              ? <icon nativeOn-click={this.handleTabRemove.bind(this,getTabNameByRoute(item))} type="md-close-circle" class="tab-close"/>
-              : ''
+                ? <icon nativeOn-click={this.handleTabRemove.bind(this, getTabNameByRoute(item))} type="md-close-circle" class="tab-close"/>
+                : ''
             }
           </div>
         )
@@ -120,8 +105,6 @@ export default {
         this.$router.push(nextRoute)
       })
     }
-  },
-  mounted () {
   }
 }
 </script>
@@ -144,6 +127,9 @@ export default {
   .logo-con{
     height: 64px;
     text-align: center;
+    img{
+      height: 80%;
+    }
   }
   .sider-outer{
     height: 100%;
@@ -179,5 +165,3 @@ export default {
   }
 }
 </style>
-
-

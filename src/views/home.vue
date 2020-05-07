@@ -1,36 +1,24 @@
 <template>
   <div class="home-wrapper">
     <Row :gutter="20">
-      <i-col :xs="24" :md="8" :lg="8" :xl="4"
+      <i-col :xs="6"  :xl="6"
         v-for="(info, i) in infoCardData" :key="`info-${i}`"
         style="height: 120px;padding-bottom: 10px;">
-          <info-card :color="info.color" :icon="info.icon" :icon-size="50">
-            <count-to :end-val="info.count"  usegroup count-class="count-class" :font-color="info.color"></count-to>
-            <p>{{info.title}}</p>
-          </info-card>
+        <Card style="text-align:center">
+          <count-to :end-val="info.count"  usegroup count-class="count-class" :font-color="info.color"></count-to>
+          <p>{{info.title}}</p>
+        </Card>
         </i-col>
     </Row>
     <Row :gutter="20">
       <i-col :lg="8" :md="24">
         <Card>
-          <chart-pie style="height: 300px" :value="pieData" text="输出占比"></chart-pie>
+          <chart-pie style="height: 300px" :value="pieData" text="菜品销量"></chart-pie>
         </Card>
       </i-col>
       <i-col :lg="16" :md="24">
         <Card>
-          <chart-bar style="height: 300px" :value="barData" text="战斗力"></chart-bar>
-        </Card>
-      </i-col>
-    </Row>
-    <Row :gutter="20" type="flex">
-      <i-col :lg="12">
-        <Card class="card-img">
-           <img src="../assets/img/cover.png">
-        </Card>
-      </i-col>
-      <i-col :lg="12">
-        <Card class="card-img">
-           <img src="../assets/img/cover.png">
+          <chart-bar style="height: 300px" :value="barData" text="近七天销售额"></chart-bar>
         </Card>
       </i-col>
     </Row>
@@ -51,28 +39,26 @@ export default {
   data() {
     return {
       infoCardData: [
-        { title: '所有英雄', icon: 'meiguoduichang3', count: 1526, color: '#2d8cf0' },
-        { title: '种族划分', icon: 'lvjuren3', count: 162, color: '#19be6b' },
-        { title: '地球英雄', icon: 'leishen2', count: 272, color: '#ff9900' },
-        { title: '动漫剧集', icon: 'gangtiexia5', count: 657, color: '#ed3f14' },
-        { title: '上映电影', icon: 'fuchouzhelianmeng-heiguafu', count: 22, color: '#E46CBB' },
-        { title: '新增英雄', icon: 'fuchouzhelianmeng-yingyan', count: 14, color: '#9A66E4' }
+        { title: '总营业额', count: 1526231, color: '#2d8cf0' },
+        { title: '本月营业额', count: 12312, color: '#19be6b' },
+        { title: '当日营业额', count: 657, color: '#ed3f14' },
+        { title: '菜品总数', count: 5, color: '#E46CBB' },
       ],
       pieData: [
-        { value: 32, name: '美国队长', itemStyle:{ color: '#2d8cf0'} },
-        { value: 27, name: '雷神', itemStyle:{ color: '#ff9900'}  },
-        { value: 30, name: '绿巨人', itemStyle:{ color: '#19be6b'}  },
-        { value: 40, name: '钢铁侠', itemStyle:{ color: '#ed3f14'}  },
-        { value: 21, name: '黑寡妇', itemStyle:{ color: '#E46CBB'}  },
-        { value: 22, name: '鹰眼', itemStyle:{ color: '#9A66E4'} }
+        { value: 32, name: '鱼香肉丝', itemStyle:{ color: '#2d8cf0'} },
+        { value: 27, name: '青椒炒肉', itemStyle:{ color: '#ff9900'}  },
+        { value: 30, name: '麻婆豆腐', itemStyle:{ color: '#19be6b'}  },
+        { value: 40, name: '回锅肉', itemStyle:{ color: '#ed3f14'}  },
+        { value: 21, name: '番茄炒鸡蛋', itemStyle:{ color: '#E46CBB'}  },
       ],
       barData: {
-        '美国队长': '6642',
-        '雷神': '8642',
-        '绿巨人': '9642',
-        '钢铁侠': '7726',
-        '黑寡妇': '4982',
-        '鹰眼': '5827',
+        '4-10': '136',
+        '4-11': '55',
+        '4-12': '123',
+        '4-13': '156',
+        '4-14': '65',
+        '4-15': '85',
+        '4-16': '102'
       }
     }
   },
@@ -84,7 +70,7 @@ export default {
     margin-bottom: 10px;
   }
   .count-class{
-  font-size: 3vw;
+  font-size: 2vw;
   }
   .card-img{
     height: 100%;

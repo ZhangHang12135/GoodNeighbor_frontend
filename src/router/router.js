@@ -1,34 +1,6 @@
 // 路由
 import Main from '@/views/layout.vue'
 
-export const routeMap = [
-  {
-    path: '/',
-    name: 'layout',
-    component: Main,
-    children: [
-      {
-        path: 'home',
-        name: 'home',
-        meta: {
-          title: '首页',
-          icon: 'A'
-        },
-        component: () => import('@/views/home.vue')
-      }
-    ]
-  },
-  {
-    path: 'menu',
-    name: 'menu',
-    meta: {
-      title: '菜品管理',
-      icon: 'A'
-    },
-    component: () => import('@/views/menu.vue')
-  }
-]
-
 export const routes = [
   {
     path: '/login',
@@ -61,18 +33,82 @@ export const routes = [
         name: 'home',
         meta: {
           title: '首页',
-          icon: 'A'
+          icon: 'ios-home'
         },
         component: () => import('@/views/home.vue')
+      }
+    ]
+  },
+  {
+    path: '/menu',
+    name: 'menu',
+    component: Main,
+    meta: {
+      title: '菜品管理',
+      icon: 'ios-paper'
+    },
+    children: [
+      {
+        path: 'add-menu',
+        name: 'add-menu',
+        meta: {
+          title: '新增菜品',
+          icon: 'md-add-circle'
+        },
+        component: () => import('@/views/menu/add-menu.vue')
       },
       {
-        path: 'menu',
-        name: 'menu',
+        path: 'menu-list',
+        name: 'menu-list',
         meta: {
-          title: '菜品管理',
-          icon: 'A'
+          title: '所有菜品',
+          icon: 'ios-apps'
         },
-        component: () => import('@/views/menu.vue')
+        component: () => import('@/views/menu/menu-list.vue')
+      }
+    ]
+  },
+  {
+    path: '/order',
+    name: 'order',
+    component: Main,
+    meta: {
+      title: '订单管理',
+      icon: 'ios-cube'
+    },
+    children: [
+      {
+        path: 'order-now',
+        name: 'order-now',
+        meta: {
+          title: '当前订单',
+          icon: 'ios-ionic'
+        },
+        component: () => import('@/views/order/order-now.vue')
+      },
+      {
+        path: 'order-list',
+        name: 'order-list',
+        meta: {
+          title: '历史订单',
+          icon: 'ios-list-box'
+        },
+        component: () => import('@/views/order/order-list.vue')
+      }
+    ]
+  },
+  {
+    path: '/',
+    component: Main,
+    children: [
+      {
+        path: 'user-center',
+        name: 'usercenter',
+        meta: {
+          title: '个人中心',
+          icon: 'ios-person'
+        },
+        component: () => import('@/views/user-center.vue')
       }
     ]
   },

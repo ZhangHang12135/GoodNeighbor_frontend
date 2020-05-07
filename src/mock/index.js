@@ -13,4 +13,19 @@ Mock.mock(/\/getUserInfo/, 'get', getUserInfo)
 Mock.mock(/\/authorization/, 'get', authorization)
 Mock.mock(/\/getTableData/, 'post', getTableData)
 Mock.mock(/\/getBigData/, 'post', getBigData)
+Mock.mock(/\/register/, 'post', ()=>{
+  return {
+    data: 'ok'
+  }
+})
+Mock.mock(/\/getMenuList/, 'get', ()=>{
+  return {
+    data: [
+      {title:'1', desc: '123', price: 2},
+      {title:'3', desc: '123', price: 2},
+      {title:'2', desc: '123', price: 2},
+      {title:'1', desc: '123', price: 2}
+    ]
+  }
+})
 export default Mock

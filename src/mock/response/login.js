@@ -1,10 +1,10 @@
 export const login = (options) => {
   return {
-    code: 200,
-    data: {
-      token: 'xxx'
-    },
-    mes: 'Welcome'
+      phone: '1314',
+      name: '张航',
+      address: '湖北省武汉市',
+      rider: '张航',
+      riderPhone: '123124'
   }
 }
 export const authorization = (options) => {

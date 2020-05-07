@@ -1,24 +1,33 @@
 import axios from './index'
+import { baseURL } from '@/config'
 
-export const login = ({ userName, password }) => {
+export const login = ({ phone, password }) => {
   return axios.request({
-    url: 'http://192.168.0.105:7001/login',
+    url: baseURL + 'login',
     data: {
-      userName,
+      phone,
       password
     },
     method: 'post'
   })
 }
 
-
-export const getUserInfo = (token) => {
-  console.log('发送请求')
+export const register = (form) => {
   return axios.request({
-    url: 'http://192.168.0.105:7001/getUserInfo',
-    params: {
-      token
-    },
-    method: 'get'
+    url: baseURL + 'register',
+    data: form,
+    method: 'post'
   })
 }
+
+export const updatePassword = (phone, password) => {
+  return axios.request({
+    url: baseURL + 'updatePassword',
+    data: {
+      phone,
+      password
+    },
+    method: 'post'
+  })
+}
+

@@ -1,43 +1,45 @@
 <template>
   <div class="login">
-    <div class="login-con">
-      <Card icon="login-in" title="登录" :bordered="true">
-        <div class="form-con">
-          <login-form @on-success-valid="handleSubmit"></login-form>
-          <div class="login-tip"><router-link to="/forgetPwd">忘记密码？</router-link></div>
-        </div>
-      </Card>
-    </div>
+    <layout-gn></layout-gn>
+      <div class="login-con">
+        <Card title="登录" :bordered="true">
+          <div class="form-con">
+            <login-form @on-success-valid="handleSubmit"></login-form>
+            <div class="login-tip"><router-link to="/forgetPwd">忘记密码？</router-link></div>
+          </div>
+        </Card>
+      </div>
   </div>
+
 </template>
 <script>
 import LoginForm from '_c/login-form'
+import LayoutGn from '_c/layout-gn'
 import { mapActions } from 'vuex'
 import store from '@/store'
 export default {
   name: 'login_page',
   data() {
     return {
-      userName: '',
+      phone: '',
       password: ''
     }
   },
   components: {
-    LoginForm
+    LoginForm,
+    LayoutGn
   },
   methods: {
     ...mapActions([
       'login',
-      'getUserInfo'
     ]),
-    handleSubmit ({userName, password}) {
-      this.login({userName, password}).then(res => {
-        // 这里的actions没有传值，所以res为空
-        this.getUserInfo(userName).then(res => {
+    handleSubmit ({phone, password}) {
+      this.login({phone, password}).then(res => {
           this.$router.push({
             name: 'home'
         })
-        })
+      }).catch((err)=>{
+        this.$Message.error(err)
       })
     }
   }

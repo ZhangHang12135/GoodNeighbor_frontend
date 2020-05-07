@@ -17,8 +17,8 @@ export const setTitle = (title = 'admin') => {
   window.document.title = title
 }
 
-export const setUser = ({ userName, avatarImgPath }) => {
-  Cookies.set('user', JSON.stringify({ userName, avatarImgPath }), { expires: cookieExpires || 1 })
+export const setUser = (user) => {
+  Cookies.set('user', JSON.stringify(user), { expires: cookieExpires || 1 })
 }
 export const getUser = () => {
   const user = Cookies.get('user')

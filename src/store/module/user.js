@@ -1,18 +1,21 @@
-import { login, getUserInfo } from '@/api/user'
-import { setToken, getToken, setUser } from '@/lib/util'
+import { login } from '@/api/user'
+import { setToken, setUser } from '@/lib/util'
 
 export default {
   state: {
-    userName: '',
-    avatarImgPath: '',
-    token: getToken()
+    user: {
+      uId: '',
+      phone: '',
+      name: '',
+      address: '',
+      rider: '',
+      riderPhone: ''
+    }
   },
   mutations: {
-    SET_USER_NAME (state, name) {
-      state.userName = name
-    },
-    SET_IMG (state, img) {
-      state.avatarImgPath = img
+    SET_USER (state, user) {
+      state.user = user
+      setUser(user)
     },
     SET_TOKEN (state, token) {
       state.token = token
@@ -20,16 +23,11 @@ export default {
     }
   },
   actions: {
-    login ({ commit }, { userName, password }) {
+    login ({ commit }, { phone, password }) {
       return new Promise((resolve, reject) => {
-        login({ userName, password }).then(res => {
-          console.log(res)
-          if (res.code === 200 && res.data.token) {
-            commit('SET_TOKEN', res.data.token)
-            resolve()
-          } else {
-            reject(new Error('错误---error'))
-          }
+        login({ phone, password }).then(res => {
+          commit('SET_USER', res)
+          resolve()
         }).catch(error => {
           reject(error)
         })
@@ -40,26 +38,6 @@ export default {
         commit('SET_TOKEN', '')
         setUser({})
         resolve()
-      })
-    },
-    getUserInfo ({ state, commit }) {
-      return new Promise((resolve, reject) => {
-        try {
-          getUserInfo(state.token).then(res => {
-            const data = res.data
-            const userName = data.userName
-            const avatarImgPath = data.img
-            commit('SET_USER_NAME', userName)
-            commit('SET_IMG', avatarImgPath)
-            setUser({ userName, avatarImgPath })
-            resolve(data)
-          }).catch(err => {
-            console.log('???')
-            reject(err)
-          })
-        } catch (error) {
-          reject(error)
-        }
       })
     }
   }
