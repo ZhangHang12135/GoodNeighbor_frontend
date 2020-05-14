@@ -26,42 +26,56 @@
 </template>
 <script>
 import CountTo from '_c/count-to'
-import InfoCard from '_c/info-card'
 import { ChartPie, ChartBar } from '_c/e-charts'
+import { getHome } from '@/api/home'
+import { getUser } from '@/lib/util'
 export default {
   name: 'home',
   components:{
     CountTo,
-    InfoCard,
     ChartPie,
     ChartBar
   },
   data() {
     return {
       infoCardData: [
-        { title: '总营业额', count: 1526231, color: '#2d8cf0' },
-        { title: '本月营业额', count: 12312, color: '#19be6b' },
-        { title: '当日营业额', count: 657, color: '#ed3f14' },
-        { title: '菜品总数', count: 5, color: '#E46CBB' },
+        { title: '总营业额', count: 0, color: '#2d8cf0' },
+        { title: '本月营业额', count: 0, color: '#19be6b' },
+        { title: '当日营业额', count: 0, color: '#ed3f14' },
+        { title: '菜品总数', count: 0, color: '#E46CBB' },
       ],
       pieData: [
-        { value: 32, name: '鱼香肉丝', itemStyle:{ color: '#2d8cf0'} },
-        { value: 27, name: '青椒炒肉', itemStyle:{ color: '#ff9900'}  },
-        { value: 30, name: '麻婆豆腐', itemStyle:{ color: '#19be6b'}  },
-        { value: 40, name: '回锅肉', itemStyle:{ color: '#ed3f14'}  },
-        { value: 21, name: '番茄炒鸡蛋', itemStyle:{ color: '#E46CBB'}  },
+        { value: 32, name: '鱼香肉丝' },
+        { value: 27, name: '青椒炒肉' },
+        { value: 30, name: '麻婆豆腐' },
+        { value: 40, name: '回锅肉' },
+        { value: 21, name: '番茄炒鸡蛋' },
       ],
-      barData: {
-        '4-10': '136',
-        '4-11': '55',
-        '4-12': '123',
-        '4-13': '156',
-        '4-14': '65',
-        '4-15': '85',
-        '4-16': '102'
-      }
+      barData: [
+        {date:'4-10', value: '136'},
+        {date:'4-11', value: '136'},
+        {date:'4-12', value: '136'},
+        {date:'4-13', value: '136'},
+        {date:'4-14', value: '136'},
+        {date:'4-15', value: '136'},
+        {date:'4-16', value: '136'}
+      ]
     }
   },
+  computed: {
+    user () {
+      return getUser()
+    }
+  },
+  created () {
+    getHome(this.user.uId).then(res=>{
+      this.infoCardData.forEach((item,index) => {
+        item.count = res.sales[index];
+      })
+      this.pieData = res.menuData || []
+      this.barData = res.SevenDaysSales || []
+    })
+  }
 }
 </script>
 <style lang="less">

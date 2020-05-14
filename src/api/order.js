@@ -20,3 +20,11 @@ export const getOrderList = (uId) => {
     method: 'get'
   })
 }
+
+export const updateOrder = (order) => {
+  return axios.request({
+    url: baseURL + 'updateOrder',
+    data: order,
+    method: 'post'
+  })
+}
