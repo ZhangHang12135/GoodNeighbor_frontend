@@ -1,5 +1,6 @@
 <template>
-  <div ref="dom"></div>
+  <div v-if="value.length == 0" style="text-align:center"><h3>暂无菜品</h3></div>
+  <div v-else ref="dom" class="chart"></div>
 </template>
 <script>
 import echarts from 'echarts'
@@ -23,10 +24,8 @@ export default {
     resize () {
       if (this.dom) this.dom.resize()
       else console.log('undefind dom')
-    }
-  },
-  mounted () {
-    this.$nextTick(() =>{
+    },
+    draw () {
       // 从value中提取出name
       let lengend = this.value.map(item => item.name)
       let option = {
@@ -52,6 +51,12 @@ export default {
                 center: ['50%', '60%'],
                 data:this.value,
                 itemStyle: {
+                    normal: {
+                      color: function (params) {
+                        let colorList = ['#2d8cf0', '#ff9900','#19be6b','#ed3f14','#E46CBB','#9A66E4','#b91212']
+                        return colorList[params.dataIndex]
+                      }
+                    },
                     emphasis: {
                         shadowBlur: 10,
                         shadowOffsetX: 0,
@@ -63,6 +68,16 @@ export default {
       }
       this.dom = echarts.init(this.$refs.dom)
       this.dom.setOption(option)
+    }
+  },
+  watch:{
+    value(){
+      this.draw();
+    }
+  },
+  mounted () {
+    this.$nextTick(() =>{
+      this.draw();
       handleOn(window, 'resize', this.resize)
     })
   },

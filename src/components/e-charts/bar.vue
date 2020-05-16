@@ -1,5 +1,6 @@
 <template>
-  <div ref="dom"></div>
+  <div v-if="JSON.stringify(value) == '{}'" style="text-align:center"><h3>暂无销售数据</h3></div>
+  <div v-else ref="dom" class="chart"></div>
 </template>
 <script>
 import echarts from 'echarts'
@@ -12,24 +13,27 @@ export default {
     }
   },
   props: {
-    value: Object,
+    value: Array,
     text: String,
     subText: {
       type: String,
       default: ''
     }
   },
+  watch:{
+    value(){
+      this.draw();
+    }
+  },
   methods: {
     resize () {
       this.dom.resize()
-    }
-  },
-  mounted () {
-    this.$nextTick(() =>{
+    },
+    draw () {
       // 横坐标
-      let xAxisData = Object.keys(this.value)
+      let xAxisData = this.value.map(item => item.date)
       // 对应值
-      let seriesData = Object.values(this.value)
+      let seriesData = this.value.map(item => item.value)
       let option = {
         title : {
             text: this.text,
@@ -53,7 +57,7 @@ export default {
           itemStyle: {
             normal: {
               color: function (params) {
-                let colorList = ['#2d8cf0', '#ff9900','#19be6b','#ed3f14','#E46CBB','#9A66E4']
+                let colorList = ['#2d8cf0', '#ff9900','#19be6b','#ed3f14','#E46CBB','#9A66E4','#b91212']
                 return colorList[params.dataIndex]
               }
             }
@@ -62,6 +66,11 @@ export default {
       }
       this.dom = echarts.init(this.$refs.dom)
       this.dom.setOption(option)
+    }
+  },
+  mounted () {
+    this.$nextTick(() =>{
+      this.draw();
       handleOn(window, 'resize', this.resize)
     })
   },

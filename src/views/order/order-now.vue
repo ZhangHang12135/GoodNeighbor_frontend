@@ -1,8 +1,15 @@
 <template>
-  <Table stripe :columns="columns" :data="data"></Table>
+  <Table stripe :columns="columns" :data="data">
+    <template slot-scope="{ row }" slot="order_state">
+      <Tag :color="colors[row.order_state]">{{ states[row.order_state]}}</Tag>
+    </template>
+    <template slot-scope="{ row }" slot="option">
+        <Button type="primary" size="small" style="margin-right: 5px" @click="next(row)">{{ texts[row.order_state] }}</Button>
+    </template>
+  </Table>
 </template>
 <script>
-import { getOrderNow } from '@/api/order'
+import { getOrderNow, updateOrder } from '@/api/order'
 import { getUser } from '@/lib/util'
 export default {
   data () {
@@ -15,9 +22,13 @@ export default {
         { title: '配送地址', key: 'custom_address'},
         { title: '订单内容', key: 'order_menu'},
         { title: '订单金额', key: 'order_price'},
-        { title: '订单状态', key: 'order_state'}
+        { title: '订单状态', slot: 'order_state'},
+        { title: '操作', slot: 'option'}
       ],
-      data: []
+      data: [],
+      states: ['未处理','配餐中','配送中'],
+      texts: ['接单', '配送', '完成'],
+      colors: ['default','#52c41a','#b91212']
     }
   },
   computed: {
@@ -27,11 +38,23 @@ export default {
   },
   created () {
     getOrderNow(this.user.uId).then(res=>{
-      this.data = res.map((item)=>{
-        item.order_state = item.order_state === 0 ? '处理中...' : '已完成';
-        return item;
-      });
+      this.data = res;
     })
+  },
+  methods: {
+    next(row) {
+      let nextState = row.order_state + 1;
+      if(nextState !== 3){
+        row.order_state++;//先做视图变化，再更新数据库
+        updateOrder(row);
+      } else {
+        updateOrder({ order_state: nextState, order_id: row.order_id }).then(res => {
+          getOrderNow(this.user.uId).then(res=>{
+            this.data = res;
+          })
+        });
+      }
+    }
   }
 }
 </script>
